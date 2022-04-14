@@ -1,9 +1,7 @@
 package ReusingImmutableValueObjs1ae9;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.ref.WeakReference;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -11,15 +9,20 @@ public class Point {
     private final int coordX;
     private final int coordY;
     private final int coordZ;
-    private static final Map<Point, Point> pool = new HashMap<>();
+    private static final WeakHashMap<Point, WeakReference<Point>> pool = new WeakHashMap<>();
 
     //called a factory method
     public static Point makePoint(int x, int y, int z) {
         Point newPoint = new Point(x, y, z);
-        if (pool.containsKey(newPoint)) return pool.get(newPoint);
-        pool.put(newPoint, newPoint);
+        if (pool.containsKey(newPoint)) return pool.get(newPoint).get();
+        pool.put(newPoint, new WeakReference<>(newPoint));
         return newPoint;
     }
+
+    public static int getPoolSize() {
+        return pool.size();
+    }
+
     public Point(int coordX, int coordY, int coordZ) {
         this.coordX = coordX;
         this.coordY = coordY;
