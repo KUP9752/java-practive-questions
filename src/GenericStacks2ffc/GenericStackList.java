@@ -1,24 +1,24 @@
-package StrignStack1486;
+package GenericStacks2ffc;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Collections.reverse;
 
-public class StringStackList implements StringStack{
-    protected List<String> stack;
+public class GenericStackList<T> implements GenericStack<T>{
+    private final List<T> stack;
 
-    public StringStackList() {
+    public GenericStackList() {
         this.stack = new ArrayList<>();
     }
 
     @Override
-    public void push(String s) {
-        stack.add(s);
+    public void push(T item) {
+        stack.add(item);
     }
 
     @Override
-    public String pop() {
+    public T pop() {
         return isEmpty() ? null : stack.remove(stack.size() - 1);
     }
 
@@ -29,14 +29,15 @@ public class StringStackList implements StringStack{
 
     @Override
     public String toString() {
-        List<String> copyStack = new ArrayList<>(stack);
-        reverse(copyStack);
         StringBuilder sb = new StringBuilder();
         sb.append("| ");
+        List<T> copyStack = new ArrayList<>(stack);
+        reverse(copyStack);
         copyStack.forEach(
                 item -> sb.append(item)
-                        .append(" | ")
+                        .append( " | ")
         );
         return sb.toString();
     }
+
 }
