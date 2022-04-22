@@ -1,7 +1,9 @@
 package IntSet8a61;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MemoryEfficientIntSet implements IntSet {
 
@@ -14,6 +16,18 @@ public class MemoryEfficientIntSet implements IntSet {
     @Override
     public void add(int x) {
         if (!contains(x)) items.add(x);
+    }
+
+    @Override
+    public void addAll(int[] ints) {
+        Set<Integer> setInts = new HashSet<Integer>(items);
+        for (int i : ints) {
+            if (!setInts.contains(i)) {
+                add(i);
+                setInts.add(i);
+            }
+        }
+
     }
 
     @Override
