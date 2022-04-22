@@ -2,7 +2,7 @@ package ColouredPoints0f05;
 
 public class ColouredPoint extends Point {
 
-    final Colour colour;
+    private final Colour colour;
 
     public ColouredPoint(double x, double y, double z, Colour colour) {
         super(x, y, z);
@@ -13,9 +13,22 @@ public class ColouredPoint extends Point {
         this(p.getX(), p.getY(), p.getZ(), colour);
     }
 
+    public Colour getColour() {
+        return colour;
+    }
     @Override
     public String toString() {
         return colour + ":" + super.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof ColouredPoint otherPoint) {
+            return super.equals(other) &&
+                    colour.equals(otherPoint.getColour());
+        }
+
+        return false;
     }
 
 

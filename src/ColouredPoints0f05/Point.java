@@ -51,15 +51,33 @@ public class Point {
         return sb.toString();
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Point otherPoint) {
+            return x == otherPoint.getX() &&
+                    y == otherPoint.getY() &&
+                    z == otherPoint.getZ();
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         Point p = new Point(3, 4, 0);
         Point p1 = new Point(3, 4, 4);
-        System.out.println(p.getMagnitude());
-        System.out.println(p.distanceTo(p1));
-        System.out.println(p);
+        Point q = new Point(3, 4, 0);
+//        System.out.println(p.getMagnitude());
+//        System.out.println(p.distanceTo(p1));
+//        System.out.println(p);
 
         ColouredPoint cp = new ColouredPoint(p, Colour.RED);
-        System.out.println(cp);
+        ColouredPoint cq = new ColouredPoint(q, Colour.RED);
+
+//        System.out.println(cp);
+
+        System.out.println("p == q: "  + p.equals(q));
+        System.out.println("cp == cq: "  + cp.equals(cq));
+        System.out.println("p == cp : " + p.equals(cp)); // true
+        System.out.println("cp == p: " + cp.equals(p)); // false  --> .equals is not symmetric
 
 
     }
