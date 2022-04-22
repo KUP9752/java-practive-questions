@@ -18,8 +18,9 @@ public class GenericStackList<T> implements GenericStack<T>{
     }
 
     @Override
-    public T pop() {
-        return isEmpty() ? null : stack.remove(stack.size() - 1);
+    public T pop() throws EmptyStackException {
+        if (isEmpty()) throw new EmptyStackException("Stack is Empty");
+        return stack.get(stack.size() - 1);
     }
 
     @Override

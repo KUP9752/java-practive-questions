@@ -18,16 +18,16 @@ public class GenericStackArray<T> implements GenericStack<T>{
     }
 
     @Override
-    public void push(T item) {
+    public void push(T item) throws StackFullException {
         if (!isFull()) {
             stack[nextFree] = item;
             nextFree++;
-        }
+        } else throw new StackFullException("Stack is Full");
     }
 
     @Override
-    public T pop() {
-        if (isEmpty()) return null;
+    public T pop() throws EmptyStackException{
+        if (isEmpty()) throw new EmptyStackException("Stack is Empty");
         nextFree--;
         return stack[nextFree];
     }
