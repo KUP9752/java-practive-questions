@@ -23,6 +23,6 @@ public class GenericSpeedEfficientSet<T> implements GenericSet<T> {
 
     @Override
     public String toString() {
-        return
+        return "";
     }
 }
