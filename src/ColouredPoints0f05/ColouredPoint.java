@@ -16,9 +16,15 @@ public class ColouredPoint extends Point {
     public Colour getColour() {
         return colour;
     }
+
     @Override
     public String toString() {
         return colour + ":" + super.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() * colour.ordinal();
     }
 
     @Override
@@ -29,6 +35,10 @@ public class ColouredPoint extends Point {
         }
 
         return false;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Colour.RED.ordinal());
     }
 
 

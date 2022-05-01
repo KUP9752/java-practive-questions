@@ -61,6 +61,11 @@ public class Point {
         return false;
     }
 
+    @Override
+    public int hashCode() {
+        return (int) ((x * y * z) % 101);
+    }
+
     public static void main(String[] args) {
         Point p = new Point(3, 4, 0);
         Point p1 = new Point(3, 4, 4);
